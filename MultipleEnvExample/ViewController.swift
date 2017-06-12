@@ -8,16 +8,25 @@
 
 import UIKit
 
+func prettyText(label: String, value: String) -> NSAttributedString {
+    let text = NSMutableAttributedString()
+    text.append(NSAttributedString(string: label, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]))
+    text.append(NSAttributedString(string: label, attributes: [NSFontAttributeName: UIFont.italicSystemFont(ofSize: 14)]))
+
+    return text
+}
+
 class ViewController: UIViewController {
+    private let config = Config()
+
+    @IBOutlet weak var apiKeyLabel: UILabel!
+    @IBOutlet weak var serverLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        serverLabel.attributedText = prettyText(label: "Server Endpoint:", value: config.serverEndpoint.absoluteString)
+        apiKeyLabel.attributedText = prettyText(label: "Stripe API Key:", value: config.stripeKey)
     }
 
 
