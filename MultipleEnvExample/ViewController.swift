@@ -11,7 +11,7 @@ import UIKit
 func prettyText(label: String, value: String) -> NSAttributedString {
     let text = NSMutableAttributedString()
     text.append(NSAttributedString(string: label, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]))
-    text.append(NSAttributedString(string: label, attributes: [NSFontAttributeName: UIFont.italicSystemFont(ofSize: 14)]))
+    text.append(NSAttributedString(string: value, attributes: [NSFontAttributeName: UIFont.italicSystemFont(ofSize: 14)]))
 
     return text
 }
