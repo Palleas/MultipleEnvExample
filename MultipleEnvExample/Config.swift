@@ -3,16 +3,23 @@ import Foundation
 final class Config {
 
     var serverEndpoint: URL {
-        // Here, we try to retrieve the URL based on the `SERVER_ENDPOINT` that we have in the `Info.plist`
-        // If `SERVER_ENDPOINT` is not defined or not a valid URL, we use the default one
-        guard let endpoint = Bundle.main.infoDictionary?["SERVER_ENDPOINT"] as? String, let url = URL(string: endpoint) else {
-            return URL(string: "https://requestb.in/1lxn5hp1")!
-        }
-
-        return url
+        return URL(string: value(for: "SERVER_ENDPOINT", fallback: "https://requestb.in/1lxn5hp1"))!
     }
 
     var stripeKey: String {
-        return Bundle.main.infoDictionary?["STRIPE_KEY"] as? String ?? "default-stripe-key"
+        return value(for: "STRIPE_KEY", fallback: "default-stripe-key")
+    }
+
+    // Here, we try to retrieve the URL based on the `SERVER_ENDPOINT` that we have in the `Info.plist`
+    // If it's not defined in the Info.plist, we move to an environment variable defined in the scheme
+    // If `SERVER_ENDPOINT` is not defined or not a valid URL, we use the default one
+    func value(for key: String, fallback: String) -> String {
+        if let value = Bundle.main.infoDictionary?[key] as? String {
+            return value
+        } else if let value = ProcessInfo.processInfo.environment[key] {
+            return value
+        } else {
+            return fallback
+        }
     }
 }
