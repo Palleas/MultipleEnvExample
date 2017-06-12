@@ -16,6 +16,11 @@
 
 ![](Screenshots/03-develop-and-preprod-override.png)
 
+# Multiple environments using schemes
+
+![](Screenshots/04-multiple-schemes.png)
+![](Screenshots/05-scheme-environment-variable.png)
+
 # Additional infos: 
 
 * Setting up env var in buddybuild - [link](http://docs.buddybuild.com/docs/environment-variables)
